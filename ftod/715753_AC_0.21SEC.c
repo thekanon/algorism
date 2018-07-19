@@ -1,0 +1,1 @@
+main(){int a,b,c,i=0;scanf("%d%d%d",&a,&b,&c);printf("0.");for(;i<c;i++){a*=10;printf("%d",a/b);a=a%b;}}

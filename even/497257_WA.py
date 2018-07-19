@@ -1,0 +1,1 @@
+main(a,b){scanf("%d%d",&a,&b);printf ("%d\n", (b-a+1) - (((int)sqrt(a)*(int)sqrt(a)==a)?((int)sqrt(b)-(int)sqrt(a)+1):((int)sqrt(b)-(int)sqrt(a))));
