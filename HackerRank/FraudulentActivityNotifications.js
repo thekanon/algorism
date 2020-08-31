@@ -30,10 +30,10 @@ expend이 200아래의 값만 받으니까
 
 */
 // Complete the activityNotifications function below.
-// const expenditure = [2, 3, 4, 2, 3 ,6 ,8 ,4 ,5];
-// const d = 5;
-const expenditure = [10, 20, 30, 40, 50]
-const d = 3;
+const expenditure = [2, 3, 4, 2, 3 ,6 ,8 ,4 ,5];
+const d = 5;
+// const expenditure = [10, 20, 30, 40, 50]
+// const d = 3;
 function activityNotifications(expenditure, d) {
     const n = expenditure.length
     var answer = 0;
@@ -56,7 +56,7 @@ function activityNotifications(expenditure, d) {
         var median = parseInt(d/2+1)
         //홀수라면
         if(d%2 == 1){
-            if(j!=201 && j*2<expenditure[i])
+            if(j!=201 && j*2<=expenditure[i])
                 answer++;
         }
         else {
@@ -69,10 +69,10 @@ function activityNotifications(expenditure, d) {
                 }
             }
 
-            if(k!=201 && (k+j)*2<expenditure[i])
+            if(k!=201 && (k+j)*2<=expenditure[i])
                 answer++;
         }
-        debugger
+        debugger;
     }
     return answer
 }
