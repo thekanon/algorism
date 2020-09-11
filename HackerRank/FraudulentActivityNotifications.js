@@ -35,59 +35,50 @@ var d = 9999;
 // var expenditure = [10, 20, 30, 40, 50]
 // var d = 3;
 function activityNotifications(expenditure, d) {
-    var n = expenditure.length
-    var answer = 0;
-    var sArr = new Array(201);
-    //배열 초기화
-    for(var j=0;j<=200;j++){
-        sArr[j]=0;
+    //step 1. 배열 1부터 200까지의 수를 카운트하는 배열 선언 및 초기화
+    var arr = [];
+    for(var i=0;i<200;i++){
+        arr.push(0);
     }
-    //배열에 지출금액 빈도수 넣기
+    console.log(arr);
+    
+    //step 2. d개의 배열을 돌면서 각각의 값을 arr인덱스에 넣어줌
     for(var i=0;i<d;i++){
-        sArr[expenditure[i]] = sArr[expenditure[i]]+1;
+        arr[expenditure[i]]++;
     }
-    for(var i=d;i<n;i++){
-        //중앙값은 홀수이면 /2 + 1 이고 짝수이면 /2임
-        if(i==10269)
-            debugger;
-        var median = d%2 == 1 ? parseInt(d/2+1) : d/2
+    console.log(arr);
+
+    //step 3. 중앙값 구하기(d가 짝수면 d/2, (d/2)-1 홀수면(d+1)/2)
+    if(d%2==0){
+        var median = [];
+        median.push((d/2)-1);
+        median.push(d/2);
+    }else {
+        var median = (d+1)/2
+    }
+
+    //step 4. d부터 20만까지 돌면서 최근 9999일의 합과 그 중간값을 처리함.
+    result = 0;
+    for(var i=d;i<expenditure.length;i++){
+        //4.1. 0부터 200까지 쭉 더하면서 중간값에 도달하면 거기가 중간값이다.
         var cnt = 0;
-        for(var j=0;j<=200;j++){
-            cnt+=sArr[j];
-            //빈도수가 중앙값을 넘어서면 해당 위치가 중앙값임
-            if(median<=cnt){
-                break;
+        for(var j=0;j<200;j++){
+            cnt += arr[j];
+            if(typeof median == object){
+                if((median[0] + median[1]) * 2 <= expenditure[i]){
+                    result++;
+                }                    
+            } else {
+                if(median * 2 <= expenditure[i]){
+                    result++;
+                }                    
             }
         }
-        //짝수인 경우 중앙값 한번 더 구함
-        if(d%2 == 0){
-            //j는 재활용할꺼니까 k에 넣음
-            var k = j;
-            // median++;
-            cnt = 0; 
-            for(var j=0;j<=200;j++){
-                cnt+=sArr[j];
-                if(median<=cnt){
-                    break;
-                }
-            }
-            if(j+k<=expenditure[i]){
-                answer++;
-                console.log(i,expenditure[i], answer)
-            }
-                
-        }else {``
-            if(j*2<=expenditure[i]){
-                answer++;
-                console.log(i,j*2,expenditure[i], answer)
-            }
-                
-        }
-        
-        //sArr의 기간세팅(첫째날 빼고 마지막날 추가)
-        sArr[expenditure[i+1]] = sArr[expenditure[i+1]]+1;
-        sArr[expenditure[i-d]] = sArr[expenditure[i-d]]-1; 
     }
-    return answer
+    var sum=0
+    for(var i=0;i<200;i++){
+        sum+=arr[i];
+    }
+    console.log(sum);
 }
 activityNotifications(expenditure, d)
