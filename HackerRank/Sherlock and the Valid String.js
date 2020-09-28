@@ -29,26 +29,19 @@ That would leave character frequencies of {a:1, b:1, c:2}.
 해결방법
 생각해보니 이것도 결국은 알파벳 안에서만 돈다.
 
-해쉬로 배열 a-z을 만든다.
+해쉬로배열 a-z을 만든다.
 배열을 정렬한다.
-0의 다음부터 순회한다.
-2가지 경우가 있다.
-1. 뒷부분에 틀린값이 있는 경우
-    이때 순회는 0의 인덱스 +1부터 끝-1까지 순회한다.
-    끝의 값이 1보다 크고 끝-1의 -1이 아니라면 "NO"를 리턴한다.
-2. 앞부분에 틀린값이 있는 경우
-    이때 순회는 0의 인덱스+2부터 끝까지 순회한다.
-    0인덱스+1의 값이 1보다 크고  0인덱스+2의 -1이 아니라면 "NO"를 리턴한다.
+각 알파벳의 빈도수가 배열로 생긴다.
 
-공통적으로 순회도중에 틀린값이 나오면 "NO"를 리턴한다.
-
-
-
+거기에 해쉬의 해쉬를 만들어보자.
+그럼 빈도수의 해쉬가 생길 것이다.
+나머지는 코드에 기술함.
 */
-var s = "ibfdgaeadiaefgbhbdghhhbgdfgeiccbiehhfcggchgghadhdhagfbahhddgghbdehidbibaeaagaeeigffcebfbaieggabcfbiiedcabfihchdfabifahcbhagccbdfifhghcadfiadeeaheeddddiecaicbgigccageicehfdhdgafaddhffadigfhhcaedcedecafeacbdacgfgfeeibgaiffdehigebhhehiaahfidibccdcdagifgaihacihadecgifihbebffebdfbchbgigeccahgihbcbcaggebaaafgfedbfgagfediddghdgbgehhhifhgcedechahidcbchebheihaadbbbiaiccededchdagfhccfdefigfibifabeiaccghcegfbcghaefifbachebaacbhbfgfddeceababbacgffbagidebeadfihaefefegbghgddbbgddeehgfbhafbccidebgehifafgbghafacgfdccgifdcbbbidfifhdaibgigebigaedeaaiadegfefbhacgddhchgcbgcaeaieiegiffchbgbebgbehbbfcebciiagacaiechdigbgbghefcahgbhfibhedaeeiffebdiabcifgccdefabccdghehfibfiifdaicfedagahhdcbhbicdgibgcedieihcichadgchgbdcdagaihebbabhibcihicadgadfcihdheefbhffiageddhgahaidfdhhdbgciiaciegchiiebfbcbhaeagccfhbfhaddagnfieihghfbaggiffbbfbecgaiiidccdceadbbdfgigibgcgchafccdchgifdeieicbaididhfcfdedbhaadedfageigfdehgcdaecaebebebfcieaecfagfdieaefdiedbcadchabhebgehiidfcgahcdhcdhgchhiiheffiifeegcfdgbdeffhgeghdfhbfbifgidcafbfcd"
-
-function alternatingCharacters (s) {
-    var aArr = []
+var s = "ibfdgaeadiaefgbhbdghhhbgdfgeiccbiehhfcggchgghadhdhagfbahhddgghbdehidbibaeaagaeeigffcebfbaieggabcfbiiedcabfihchdfabifahcbhagccbdfifhghcadfiadeeaheeddddiecaicbgigccageicehfdhdgafaddhffadigfhhcaedcedecafeacbdacgfgfeeibgaiffdehigebhhehiaahfidibccdcdagifgaihacihadecgifihbebffebdfbchbgigeccahgihbcbcaggebaaafgfedbfgagfediddghdgbgehhhifhgcedechahidcbchebheihaadbbbiaiccededchdagfhccfdefigfibifabeiaccghcegfbcghaefifbachebaacbhbfgfddeceababbacgffbagidebeadfihaefefegbghgddbbgddeehgfbhafbccidebgehifafgbghafacgfdccgifdcbbbidfifhdaibgigebigaedeaaiadegfefbhacgddhchgcbgcaeaieiegiffchbgbebgbehbbfcebciiagacaiechdigbgbghefcahgbhfibhedaeeiffebdiabcifgccdefabccdghehfibfiifdaicfedagahhdcbhbicdgibgcedieihcichadgchgbdcdagaihebbabhibcihicadgadfcihdheefbhffiageddhgahaidfdhhdbgciiaciegchiiebfbcbhaeagccfhbfhaddagnfieihghfbaggiffbbfbecgaiiidccdceadbbdfgigibgcgchafccdchgifdeieicbaididhfcfdedbhaadedfageigfdehgcdaecaebebebfcieaecfagfdieaefdiedbcadchabhebgehiidfcgahcdhcdhgchhiiheffiifeegcfdgbdeffhgeghdfhbfbifgidcafbfcd";
+// var s = "aabbc"
+function isValid (s) {
+    var aArr = [];
+    var bArr = {};
     for(var i=97;i<97+26;i++){ 
         aArr[i] = 0 
     }
@@ -57,35 +50,40 @@ function alternatingCharacters (s) {
         aArr[s[i].charCodeAt()]++; 
     }
    
-    for(var i=97;i<97+26;i++){ 
-        aArr.sort();
-    }
-
-    var zeroIndex = aArr.lastIndexOf(0)
-    var startIdx = zeroIndex+1;
-    var endIdx = 25;
-
-    if(aArr[zeroIndex+1] == aArr[zeroIndex+2]){
-        startIdx = startIdx-1
-        endIdx = 26
-    }
-    console.log(aArr)
-    for(var i=startIdx+1;i<endIdx;i++){
-        if(aArr[startIdx]!=aArr[i]){
-            return "NO"
+    for(var i=97;i<97+26;i++){
+        if(aArr[i] == 0){
+            continue
         }
-            
-    }
-    if(diff==24){
-        if(aArr[diff+1]>1 && aArr[diff-1] != aArr[diff]-1)
-            return "NO"
-    }else {
-        if(aArr[diff+1]>1 && aArr[diff-1] != aArr[diff]-1)
-    }
-
-
-    if(diffCnt > 1)
+        if(bArr[aArr[i]] == undefined) {
+            bArr[aArr[i]]=1;
+        }else {
+            bArr[aArr[i]]++;
+        }
+    }    
+    var validArr = Object.keys(bArr)
+    //1. 빈도수가 3개이상일때는 무조건 아님.
+    if(validArr.length>2)
         return "NO"
-    return "YES"
+    //2. 빈도수가 1개이하일때는 무조건 맞음.
+    if(validArr.length<2)
+        return "YES"
+    //3. 빈도수가 1인경우가 1개만 있다면 그걸 제거했을때 빈도수가 사라지므로 무조건 YES다.
+    if(bArr[1]==1)
+        return "YES"
+    
+    // 빈도수의 차이가 1일때 큰 값에서 하나를 빼면 빈도수가 동일해지는지 체크
+    if(validArr[0] > validArr[1]){
+        if(Math.abs(validArr[0] - validArr[1] == 1)){
+            if(bArr[validArr[0]]==1 || bArr[validArr[1]]==1)
+                return "YES"
+        }
+    }else {
+        if(Math.abs(validArr[1] - validArr[0] == 1)){
+            if(bArr[validArr[1]]==1 || bArr[validArr[0]]==1 )
+                return "YES"
+        }
+    }
+    
+    return "NO"
 }
-alternatingCharacters(s);
+isValid(s);
