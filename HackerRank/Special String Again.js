@@ -12,41 +12,32 @@ All characters except the middle one are the same, e.g. aadaa.
 를 찾는 것이다.
 
 예전에 풀었던 Sherlock and Anagrams 문제를 확인해보니 조합 알고리즘 없이 풀 수 있었다.
+-> 취소, 모든 경우의 수를 뽑아냈더니 시간초과 오류가 발생함.
 */
-var n = 5
-var s = "asasd";
+var n = 7
+var s = "abcbaba";
 function substrCount(n, s) {
-    var sum = 0
-    for(var i=0;i<s.length;i++){   //문자열 총 길이
-        for(var j=i;j<s.length;j++){   //탐색할 문자열 갯수
-            var str = "";
-            for(var k=i;k<=j;k++){      //문자열을 순회하며 탐색할 문자열의 갯수만큼 반복
-                str+=s[k]
-            }
-            sum += testSpecial(str)
-            console.log(str)
-        }
-    }
-    return sum
-}
-function testSpecial(str){
-    //1. 모든 문자가 같은지 체크 
-    if(str.length ==1)
-        return 1;
-    for(var i=1;i<str.length;i++){
-        if(str[i]!=str[0])
-            return 0;
-    }
-    //2. 홀수인지 체크
-    if(str.length%2 ==0)
-        return 0;
-    //3. 홀수이면 앞뒤로 잘라서 같은지 체크
-    var mid = parseInt(str.length/2)
-    var st = str.substr(0,mid)
-    var end = str.substr(mid+1,str.length)
+    let count = 0;
+    let consecutiveLetters = "";
 
-    if(st != end)
-        return 0
-    return 1;
+    for (let i = 0; i < n; ++i) {
+        if (!consecutiveLetters || consecutiveLetters[0] === s[i]) {
+            // 1
+            consecutiveLetters += s[i];
+        } else {
+            let j = 1;
+            while (j <= consecutiveLetters.length && s[i + j] === consecutiveLetters[0]) {
+                console.log(s[i + j])
+                // 2
+                ++j;
+                ++count;
+            }
+            consecutiveLetters = s[i];
+        }
+        count += consecutiveLetters.length;
+    }
+
+    return count;
 }
+
 substrCount(n, s)
