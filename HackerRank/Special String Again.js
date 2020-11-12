@@ -18,10 +18,12 @@ All characters except the middle one are the same, e.g. aadaa.
 
 * consecutiveLetters는 카운트 할 조건에 해당하는 문자열이다.
 * s는 대상이 되는 전체 문자열이다.
-* i는 
-1. 우선 consecutiveLetters가 1개 쌓이면 무조건 카운트한다.
-2. consecutiveLetters가 쌓여있고, consecutiveLetters의 첫번째 값이 s[i]와 동일하다면 한번 더 쌓고 카운트한다.
-3. 
+* i는 s의 인덱스를 의미한다,.
+* s[i]는 각각의 문자열을 의미한다.
+
+1. consecutiveLetters가 한개도 없거나, consecutiveLetters의 첫번째 값이 s[i]와 동일하다면 s[i]를 consecutiveLetters에 넣어준다.
+1.1 consecutiveLetters가 1개일때는 무조건 카운트한다는 의미이다.
+2. 
 
 */
 var n = 7
@@ -31,8 +33,8 @@ function substrCount(n, s) {
     var consecutiveLetters = "";
 
     for (var i = 0; i < n; i++) {
-        // bb에 아무것도 없거나, consecutiveLetters가 각 문자열의 시작점과 동일한 경우
         if (!consecutiveLetters || consecutiveLetters[0] === s[i]) {
+            // 1
             consecutiveLetters += s[i];
         } else {
             var j = 1;
@@ -45,7 +47,6 @@ function substrCount(n, s) {
         }
         count += consecutiveLetters.length;
     }
-
     return count;
 }
 
