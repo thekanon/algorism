@@ -7,7 +7,7 @@ arr['a']++;
 
 처음 생각한 답
 1. 해쉬로 저장
-2. 정렬
+2. 정렬 sort(myvector.begin(), myvector.begin()+8);
 3. 0이랑 1이랑 같으면 ?이고 아니면 문자열 출력
 
 */
@@ -17,11 +17,28 @@ arr['a']++;
 using namespace std;
 int main(){
     int myints[] = {32,71,12,45,26,80,53,33};
-    vector<int> myvector (myints, myints+8);
-    
-    sort(myvector.begin(), myvector.begin()+8);
+    int max=0,num;
+    string str;
+    cin >> str;
 
-    for(int i=0;i<8;i++){
-        printf("%d\n",myvector[i]);
+
+    vector<int> myvector (26);
+    
+
+    for(int i=0;i<str.length();i++){
+        if(65<=str[i] && str[i]<=90){
+            myvector[str[i]-65]++;
+            num = str[i]-65;
+        }else if(97<=str[i] && str[i]<=122){
+            myvector[str[i]-97]++;
+            num = str[i]-97;
+        }
+        max = myvector[max] < myvector[num] ? num : max;
+    }
+    sort(myvector.begin(), myvector.end());
+    if(myvector[24]!=myvector[25]){
+        printf("%c",max+65);
+    }else {
+        printf("?");
     }
 }
