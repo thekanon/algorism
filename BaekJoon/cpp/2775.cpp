@@ -15,6 +15,38 @@
 1   5   15  35  70
 
 
-
-
+그냥 배열 arr[14][14]를 만든다.
+arr[0][i]는 1부터 14로 채운다.
+arr[i][0]]은 1로 채운다.
+arr[i][1]부터는 a[i-1][j]+ a[i][j-1]로 채운다.
 */
+#include <iostream>
+using namespace std;
+int main(){
+    int arr[15][15];
+    int t,k,n;
+    for(int i=0;i<15;i++){
+        for(int j=0;j<15;j++){
+            if(i==0){
+                arr[i][j]=j+1;
+            } else if(j==0){
+                arr[i][j]=1;
+            } else {
+                arr[i][j] = arr[i-1][j] + arr[i][j-1];
+            }
+        }
+    }
+    // for(int i=0;i<15;i++){
+    //     for(int j=0;j<15;j++){
+    //         printf("%3d ",arr[i][j]);
+    //     }
+    //     printf("\n");
+    // }
+    cin >> t;
+    for(int i=0;i<t;i++){
+        cin >> k;
+        cin >> n;
+        
+        printf("%d\n",arr[k][n-1]);
+    }
+}
