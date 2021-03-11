@@ -29,12 +29,16 @@ priorities 	location 	return
 예제 #2
 
 6개의 문서(A, B, C, D, E, F)가 인쇄 대기목록에 있고 중요도가 1 1 9 1 1 1 이므로 C D E F A B 순으로 인쇄합니다. 
+
+
+
+
 */
 // let priorities = [1, 1, 9, 1, 1, 1];
 // let loca = 0;
 
-let priorities = [2, 1, 3, 2];
-let loca = 2;
+let priorities = [1, 2, 3];
+let loca = 0;
 
 function solution(priorities, loca) {
     let answer = 0;
@@ -49,7 +53,10 @@ function solution(priorities, loca) {
         let el2 = idxArr.shift(0);
         if(max == el){
             answer++;
-            max = arrMax(priorities)
+            if(priorities.length!=0)
+                max = arrMax(priorities)
+            else
+                break;
             if(priorities[0]!=undefined && el2==loca){
                 break;
             }    
@@ -62,11 +69,9 @@ function solution(priorities, loca) {
     return answer;
 }
 function arrMax(arr) {
-    let max = -1;
-    arr.forEach(element =>{
-        if(max<element){
-            max = element
-        }
+    console.log(arr)
+    let max = arr.reduce((prev,curr) =>{
+        return prev >= curr ? prev:curr;
     });
 
     return max;
