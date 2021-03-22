@@ -58,7 +58,7 @@ def check(arr,k):
     if arr[0]>=k:
         return 1
     else :
-        return 0
+        return 0z
 
     
 def mix(arr):
