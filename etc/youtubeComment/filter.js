@@ -27,7 +27,7 @@ document.querySelector("#player.ytd-watch-flexy").style.position = "fixed"
 // document.querySelector("#player.ytd-watch-flexy").style.width = "70%" 
 //작은 화면일때 맞춤
 document.querySelector("#player.ytd-watch-flexy").style.width = "100%" 
-document.querySelector("#player.ytd-watch-flexy").style.left = "0"
+document.querySelector("#player.ytd-watch-flexy").style.left = "300px"
 document.querySelector("#player.ytd-watch-flexy").style.top = "0";
 
 //다른 요소가 안가리도록 함.
