@@ -35,18 +35,21 @@ function viewVideoList(e){
 function hideVideoList(e){
 }
 function viewComment(e){
-    if(e.target.clickFlag){
-        e.target.style.zIndex=''
-        e.target.style.display= "";
-        e.target.style.background= "";    
-        e.target.clickFlag = false;
-        e.target.style.position = "static";
-    }else {
-        e.target.style.position = "absolute";
-        e.target.style.zIndex='9999';
-        e.target.style.display= "block";
-        e.target.style.background= "white";
-        e.target.clickFlag = true;
+    console.log(e.target.tagName)
+    if(e.target.tagName == "YT-FORMATTED-STRING" || e.target.tagName == "SPAN"){
+        if(e.target.clickFlag){
+            e.target.style.zIndex=''
+            e.target.style.display= "";
+            e.target.style.background= "";    
+            e.target.clickFlag = false;
+            e.target.style.position = "static";
+        }else {
+            e.target.style.position = "absolute";
+            e.target.style.zIndex='9999';
+            e.target.style.display= "block";
+            e.target.style.background= "white";
+            e.target.clickFlag = true;
+        }
     }
 }
 //편의를 위한 CSS 변경
