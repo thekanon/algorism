@@ -20,7 +20,7 @@ customElements.define('data-card',
       const style = document.createElement('style');
       style.textContent = `
         * { color:white}
-        .data_card { padding: 10px; border: 1px solid white; width: 98%; margin: 10px; }
+        .data_card { padding: 10px; border: 1px solid white; width: 95%; margin: 10px; }
         h3 { margin: 0 0 10px; }
         ul { margin: 0; }
         p { margin: 10px 0; }

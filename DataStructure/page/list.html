@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="../css/style.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="../components/data-card.js"></script>
-    </head>
+  <head>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="../components/data-card.js"></script>
+    <script src="../components/list-view.js"></script>
+  </head>
+  <ul>
     <data-card>
-        <cardTitle>list</cardTitle>
-        <listView></listView>
+      <span slot="card-title">list View</span>
+      <list-view slot="card-main"></list-view>
+      <div slot="card-footer">
         <button>create</button>
         <button>push</button>
         <button>pop</button>
+      </div>
     </data-card>
+  </ul>
 </html>
