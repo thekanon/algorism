@@ -1,34 +1,37 @@
 customElements.define('list-view',
     class extends HTMLElement {
+        makeListView() {
+            let str = "";
+
+            this.array.map((el, i) => str += `
+            <tr>
+                <td>`+ i + `</td>
+                <td>`+ el + `</td>
+            </tr>
+            ` )
+
+            return str;
+        }
         constructor() {
             super();
 
 
             const template = document.createElement('template');
+
+            this.array = ["하나", "둘", "셋", "넷", "파이브", "six"];
+
+            const arrayData = this.makeListView()
+
             template.innerHTML = `
                 <div class="array">
-                    <colgroup>
-                        <col width="10%">
-                        <col width="90%">
-                    </colgroup>
+                    <h4>array name</h4>
                     <table>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>2</td>
-                            </tr>
+                        <colgroup>
+                            <col width="20%">
+                            <col width="80%">
+                        </colgroup>
+                        <thead>
+                            `+ arrayData + `
                         </tbody>
                     </table>        
                 </div>  
@@ -40,8 +43,10 @@ customElements.define('list-view',
 
             const style = document.createElement('style');
             style.textContent = `
-                * { color:white}
-                .array { width:100% }
+                * { color:white }
+                .array { margin: 40px }
+                .array table { width:100%;text-align:center }
+                .array h4 { text-align:center }
                 td { border: 1px solid}
             
             `;
