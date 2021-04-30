@@ -16,8 +16,9 @@
       <list-view slot="card-main"></list-view>
       <div slot="card-footer">
         <button>create</button>
-        <button>push</button>
-        <button>pop</button>
+        <button onclick='document.querySelector("list-view").pushArray(event,document.querySelector("#push").value)'>push</button>
+        <input size="2" id="push" value="쎄븐">
+        <button onclick='document.querySelector("list-view").popArray()'>pop</button>
       </div>
     </data-card>
   </ul>
