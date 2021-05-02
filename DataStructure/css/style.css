@@ -55,3 +55,26 @@ ul li a {
     text-transform:uppercase;
     color: #fff;
 }
+
+button {
+    width: 70px;
+    height: 30px;
+    background: gray;
+    border: 0px;
+    color: white;
+    border-radius: 10px;
+    margin-top: 4px;
+}
+input {
+    text-align: center;
+    width: 40px;
+    height: 24px;
+    background: #292929;
+    border: 1px solid;
+    color: white;
+    margin-top: 4px;
+    margin-left: 4px
+}
+.selectGroup {
+    display: flex;
+}

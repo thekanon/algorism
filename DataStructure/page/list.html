@@ -14,11 +14,21 @@
     <data-card>
       <span slot="card-title">list View</span>
       <list-view slot="card-main"></list-view>
-      <div slot="card-footer">
-        <button>create</button>
-        <button onclick='document.querySelector("list-view").pushArray(event,document.querySelector("#push").value)'>push</button>
-        <input size="2" id="push" value="쎄븐">
-        <button onclick='document.querySelector("list-view").popArray()'>pop</button>
+      <div slot="card-footer" >
+            <div class="selectGroup">
+                <button onclick='document.querySelector("list-view").pushArray(event,document.querySelector("#push").value)'>push</button><br>
+                <input id="push" value="쎄븐">
+            </div>
+            <button onclick='document.querySelector("list-view").popArray()'>pop</button>
+            <div class="selectGroup">
+                <button onclick='document.querySelector("list-view").insertArray(event,document.querySelector("#insertIndex").value,document.querySelector("#insertData").value)'>insert</button><br>
+                <input id="insertIndex" value="0">
+                <input id="insertData" value="0">
+            </div>
+            <div class="selectGroup">
+                <button onclick='document.querySelector("list-view").deleteArray(event,document.querySelector("#delete").value)'>delete</button><br>
+                <input id="delete" value="0">
+            </div>
       </div>
     </data-card>
   </ul>
