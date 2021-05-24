@@ -29,9 +29,12 @@ function solution(numbers) {
                 mergeNumbers(temp, str + arr[i]);
             }
         }
-
+        console.log(str)
         if (str.length > 0) {
             determinePrime(+str);
+        }
+        if (str.length > 0) {
+            determinePrime(+str)
         }
     };
 
@@ -40,3 +43,4 @@ function solution(numbers) {
     answer = primeNumbers.length;
     return answer;
 }
+solution("011")

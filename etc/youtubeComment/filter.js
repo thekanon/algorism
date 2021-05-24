@@ -1,9 +1,7 @@
 //댓글을 검사해서 한글이 포함되어있다면 남기고, 한글이 포함되어 있지 않다면 삭제하는 함수
-function filterEng(){
+function filterNotKor(){
     //한글 검사하는 정규식
     let korean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
-    //돌고있는지 확인
-    console.log("Run");
 
     //현재 보이는 댓글을 순회하면서 한글만 남기고 다 삭제한다.
     Object.values(document.querySelectorAll("#comment")).map( el => {
@@ -21,6 +19,9 @@ function filterEng(){
         return [false,"comment"]
     });
 }
+//0.1초마다 필터링 반복함.
+setInterval(filterNotKor, 100);
+
 function viewVideoList(e){
     if(document.querySelector("#secondary").clickFlag){
         document.querySelector("#secondary").style.zIndex=''
@@ -31,8 +32,6 @@ function viewVideoList(e){
         document.querySelector("#secondary").style.background="white"
         e.target.clickFlag = true;
     }
-}
-function hideVideoList(e){
 }
 function viewComment(e){
     console.log(e.target.tagName)
@@ -66,7 +65,6 @@ document.querySelector("#player.ytd-watch-flexy").style.top = "0";
 document.querySelector("#player.ytd-watch-flexy").style["z-index"] = 9999;
 
 //클릭 이벤트
-document.querySelector("#secondary").setAttribute("onclick","viewVideoList(event)")
-document.querySelector("#primary").setAttribute("onclick","hideVideoList(event)")
-//1초마다 필터링 반복함.
-setInterval(filterEng, 1000);
+document.querySelectorAll("#secondary")[0].setAttribute("onclick","viewVideoList(event)")
+if(document.querySelectorAll("#secondary").length==2)
+    document.querySelectorAll("#secondary")[1].setAttribute("onclick","viewVideoList(event)")
