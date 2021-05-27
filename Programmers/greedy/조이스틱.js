@@ -26,4 +26,70 @@ ex) 완성해야 하는 이름이 세 글자면 AAA, 네 글자면 AAAA
 name 	return
 "JEROEN" 	56
 "JAN" 	23
+
+
+1. 각 알파벳별 상하 이동횟수 계산
+- 더 높은 값 선택
+
+2. 좌우 이동경로 계산
+- 움직일 수 있는 최단경로 예) BAABAAA 일때 왼쪽보다 오른쪽이 이득
 */
+function solution(name) {
+    var answer = 0;
+    let str = name.split("");
+    let moveCountArr = [];
+    let checkArr = [];
+    
+    str.map(el => {
+        let up = el.charCodeAt()-"A".charCodeAt();
+        let down = "Z".charCodeAt() - el.charCodeAt()+1;
+        let move = up>down ? down : up
+        moveCountArr.push(move)
+        checkArr.push(0)
+    })
+    let idx = 0;
+    for(let i=0;i<str.length;i++){
+        // for(let j=i;j<str.)
+        let r = calRightCnt(str,idx)
+        let l = calLeftCnt(str,idx)
+        console.log("")
+        idx = calRightCnt(str,idx)
+    }
+    console.log(moveCountArr)
+    return answer;
+}
+function calLeftCnt(str,idx){
+    //현재 문자열에서 A가 아닌값까지 얼마나 이동했는지 리턴한다.(뒤로)
+    let cnt = 0;
+    if(str[idx]=="A"){
+        return 0;
+    }
+    for(let i=idx-1;i>=0;i--){
+        cnt++
+        if(str[i]!="A"){
+            return cnt;
+        }
+    }
+    for(let i=str.length-1;i>=0;i--){
+        cnt++
+        if(str[i]!="A"){
+            return cnt;
+        }
+    }
+    return 0
+}
+function calRightCnt(str,idx){
+    //현재 문자열에서 A가 아닌값까지 얼마나 이동했는지 리턴한다.
+    let cnt = 0;
+    if(str[idx]=="A"){
+        return 0;
+    }
+    for(let i=idx+1;i<str.length;i++){
+        cnt++
+        if(str[i]!="A"){
+            return cnt;
+        }
+    }
+    return 0
+}
+console.log(solution("BBAABAA"));
