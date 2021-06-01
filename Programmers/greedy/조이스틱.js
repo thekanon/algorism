@@ -29,10 +29,15 @@ name 	return
 
 
 1. 각 알파벳별 상하 이동횟수 계산
-- 더 높은 값 선택
+- 더 높은 값 선택함
+- 이를 배열로 만들어 저장
 
 2. 좌우 이동경로 계산
-- 움직일 수 있는 최단경로 예) BAABAAA 일때 왼쪽보다 오른쪽이 이득
+- 좌,우 중에 움직일 수 있는 최단경로를 선택 예) BAABAAA 일때 왼쪽보다 오른쪽이 이득
+- 이동한 거리를 인덱스로 가지도록 함.
+- 이전 인덱스 위치의 값은 A로 바꿈
+
+3. 해당 인덱스에서 다시 시작 -> str에 A만 남을때까지 반복함.
 */
 function solution(name) {
     var answer = 0;
@@ -48,15 +53,33 @@ function solution(name) {
         checkArr.push(0)
     })
     let idx = 0;
+    let addCnt = 0;
+    for(let i=0;i<str.length;i++){
+        if(str[i]!="A"){
+            idx = i
+            break;
+        }
+        addCnt++;
+            
+    }
+    moveCountArr[0]+=addCnt
     for(let i=0;i<str.length;i++){
         // for(let j=i;j<str.)
-        let r = calRightCnt(str,idx)
         let l = calLeftCnt(str,idx)
-        console.log("")
-        idx = calRightCnt(str,idx)
+        let r = calRightCnt(str,idx)
+        str[idx]="A"
+        console.log(l,r)
+
+        answer += l<r ? l : r;
+        
+        idx = l<r ? idx-l : idx+r;
+        idx = idx < 0 ? str.length+idx : idx;
+        idx = str.length <= i ? i-str.length : idx
+        console.log(idx,str)
     }
+    var sum = moveCountArr.reduce((a, b) => a + b, 0);
     console.log(moveCountArr)
-    return answer;
+    return answer+sum;
 }
 function calLeftCnt(str,idx){
     //현재 문자열에서 A가 아닌값까지 얼마나 이동했는지 리턴한다.(뒤로)
@@ -70,7 +93,7 @@ function calLeftCnt(str,idx){
             return cnt;
         }
     }
-    for(let i=str.length-1;i>=0;i--){
+    for(let i=str.length-1;i>idx;i--){
         cnt++
         if(str[i]!="A"){
             return cnt;
@@ -90,6 +113,13 @@ function calRightCnt(str,idx){
             return cnt;
         }
     }
+    for(let i=0;i<idx;i++){
+        cnt++;
+        if(str[i]!="A"){
+            return cnt;
+        }
+    }
     return 0
 }
-console.log(solution("BBAABAA"));
+console.log(solution("ABAAAAAAAAABB"));
+// console.log(solution("JEROEN"));
