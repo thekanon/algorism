@@ -5,15 +5,16 @@ function filterNotKor(){
 
     //현재 보이는 댓글을 순회하면서 한글만 남기고 다 삭제한다.
     Object.values(document.querySelectorAll("#comment")).map( el => {
+        //이벤트 할당
         if(!el.getAttribute("onclick"))
-            el.setAttribute("onclick","viewComment(event)")
+            el.setAttribute("onclick","viewComment(event)") //현재 댓글 클릭 이벤트가 없다면 추가함.
         //댓글 추출
         let string
         if(el.querySelector("#content-text")){
             string = el.querySelector("#content-text").innerText
         let result = korean.test(string)
         if(!korean.test(string))
-                     el.parentComponent.remove()
+                     el.parentComponent.remove()    //ytd-comment-thread-renderer를 삭제(comment 본체)
             return [result,(string)]
         }
         return [false,"comment"]
@@ -23,18 +24,21 @@ function filterNotKor(){
 setInterval(filterNotKor, 100);
 
 function viewVideoList(e){
-    if(document.querySelector("#secondary").clickFlag){
-        document.querySelector("#secondary").style.zIndex=''
-        document.querySelector("#secondary").style.background=""
+    //clickFlag가 true일때 비활성화, clickFlag가 false일때 활성화
+    console.log(e.target.clickFlag)
+    if(e.target.clickFlag){
+        e.target.style.zIndex=''
+        e.target.background=""
         e.target.clickFlag = false;
     }else {
-        document.querySelector("#secondary").style.zIndex='9999'
-        document.querySelector("#secondary").style.background="white"
+        e.target.style.zIndex='9999'
+        e.target.style.background="white"
         e.target.clickFlag = true;
     }
 }
 function viewComment(e){
     console.log(e.target.tagName)
+    //clickFlag가 true일때 비활성화, clickFlag가 false일때 활성화
     if(e.target.tagName == "YT-FORMATTED-STRING" || e.target.tagName == "SPAN"){
         if(e.target.clickFlag){
             e.target.style.zIndex=''

@@ -14,7 +14,7 @@ function addAmt(){
                 oldAmtId = elId
                 amt +=strr
                 amtArr.push(strr)
-                console.log(amt+" <- add " +strr+" : "+elId)    
+                console.log(amt+" - add " +strr+" : "+elId)    
             }
         }    
     }
