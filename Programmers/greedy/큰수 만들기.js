@@ -1,5 +1,3 @@
-import { checkPropTypes } from "prop-types";
-
 /*
 문제 설명
 
@@ -13,41 +11,36 @@ import { checkPropTypes } from "prop-types";
     number는 1자리 이상, 1,000,000자리 이하인 숫자입니다.
     k는 1 이상 number의 자릿수 미만인 자연수입니다.
 
-number 배열을 k만큼 이동하면서 해당 범위에서 최대값을 찾음.
-
-
-숫자각각 k만큼 반복하면서 check함수 실행.
-check함수는 현재 위치의 수가 다음 k범위안에서 더 큰값이 있는지 체크함.
-
-없으면 현상유지하고 다음 숫자로 넘어가고, 
-있으면 해당 위치로 값 이동 후 앞에 있는 값 전부 삭제
-
+스택구조
+number를 length까지 순회한다.
+    순회하면서 스택에 number[i]를 push한다.
+        아래 내용을 반복한다.
+            스택에 맨 위에 있는 값과 number[i]를 비교해서 number[i]가 더 크면 스택을 pop하고 k를 줄인다.
 
 
 */
 function solution(number, k) {
     var answer = '';
-
-    var a = number.split("");
-
+    var arr = [];
 
     for(var i=0;i<number.length;i++){
-        i = checkNumber(number,i,k)
-
-    }
-    return a.join("")
-}
-function checkNumber(number,idx,k){
-    var max = number[idx];
-    var maxIdx = -1;
-    for(var i=idx+1;i<=idx+k;i++){
-        if(number[i]<max) {
-            max = number[i]
-            maxIdx = i
+        var el = number[i];
+        while(k>0 && arr[arr.length-1]<el){
+            arr.pop();
+            k--
         }
+        arr.push(el)
+        console.log(arr,k)
     }
+    answer = arr.join("")
+    if(k!=0){
+        answer = answer.substr(0,number.length-k)
+    }
+    return answer
 }
-
-// console.log(solution("1924",2),"94");
+// console.log(solution("1924" 	,2 	,"94"))
+// console.log(solution("1231234" 	,3 	,"3234"))
 // console.log(solution("1231234",3),"3234");
-console.log(solution("4177252841",4),"775841");
+// console.log(solution("4177252841",4),"775841");
+
+console.log(solution("7777777", 2),"77777")
