@@ -38,6 +38,15 @@ function solution(number, k) {
     }
     return answer
 }
+
+// function solution(numbers){
+// 	var answer = numbers.map(e => e + "")
+//     answer.sort((a,b) => (b+a) - (a+b))
+//     answer.join('')
+//     if(answer.join('').length == answer.join('').split("0").length-1)
+//         return "0"
+//    return answer.join('')
+// }
 // console.log(solution("1924" 	,2 	,"94"))
 // console.log(solution("1231234" 	,3 	,"3234"))
 // console.log(solution("1231234",3),"3234");

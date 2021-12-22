@@ -20,9 +20,6 @@ function filterNotKor(){
         return [false,"comment"]
     });
 }
-//0.1초마다 필터링 반복함.
-setInterval(filterNotKor, 100);
-
 function viewVideoList(e){
     //clickFlag가 true일때 비활성화, clickFlag가 false일때 활성화
     console.log(e.target.clickFlag)
@@ -37,7 +34,6 @@ function viewVideoList(e){
     }
 }
 function viewComment(e){
-    console.log(e.target.tagName)
     //clickFlag가 true일때 비활성화, clickFlag가 false일때 활성화
     if(e.target.tagName == "YT-FORMATTED-STRING" || e.target.tagName == "SPAN"){
         if(e.target.clickFlag){
@@ -55,8 +51,9 @@ function viewComment(e){
         }
     }
 }
-//편의를 위한 CSS 변경
 
+//0.1초마다 필터링 반복함.C
+setInterval(filterNotKor, 100);
 //영상 상단 고정
 document.querySelector("#player.ytd-watch-flexy").style.position = "fixed"
 //큰 화면일때 맞춤
@@ -68,8 +65,3 @@ document.querySelector("#player.ytd-watch-flexy").style.top = "0";
 
 //다른 요소가 안가리도록 함.
 document.querySelector("#player.ytd-watch-flexy").style["z-index"] = 9999;
-
-//클릭 이벤트
-document.querySelectorAll("#secondary")[0].setAttribute("onclick","viewVideoList(event)")
-if(document.querySelectorAll("#secondary").length==2)
-    document.querySelectorAll("#secondary")[1].setAttribute("onclick","viewVideoList(event)")
